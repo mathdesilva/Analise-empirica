@@ -69,3 +69,23 @@ int ternarySearchIterative(long int arr[], int l, int r, long int value){
 
 	return -1;
 }
+
+int ternarySearchRecursive(long int arr[], int l, int r, long int value){
+	int leftThird = l + ((r - l) / 3);
+	int rightThird = l + 2 * ((r - l) / 3);
+
+	if(l <= r){
+		if(arr[leftThird] == value)
+			return leftThird;
+		else if(arr[rightThird] == value)
+			return rightThird;
+		else if(arr[leftThird] > value)
+			return ternarySearchRecursive(arr, l, leftThird - 1, value);
+		else if(arr[rightThird] > value)
+			return ternarySearchRecursive(arr, leftThird + 1, rightThird - 1, value);
+		else
+			return ternarySearchRecursive(arr, rightThird + 1, r, value);
+	}
+
+	return -1;
+}

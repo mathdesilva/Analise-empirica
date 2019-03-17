@@ -9,4 +9,6 @@ int binarySearchRecursive(long int arr[], int l, int r, long int value);
 
 int ternarySearchIterative(long int arr[], int l, int r, long int value);
 
+int ternarySearchRecursive(long int arr[], int l, int r, long int value);
+
 #endif
