@@ -44,3 +44,28 @@ int binarySearchRecursive(long int arr[], int l, int r, long int value){
 
 	return -1;
 }
+
+int ternarySearchIterative(long int arr[], int l, int r, long int value){
+	int leftThird;
+	int rightThird;
+
+	while(l <= r){
+		leftThird = l + ((r - l) / 3);
+		rightThird = l + 2 * ((r - l) / 3);
+
+		if(arr[leftThird] == value)
+			return leftThird;
+		else if(arr[rightThird] == value)
+			return rightThird;
+		else if(arr[leftThird] > value)
+			r = leftThird - 1;
+		else if(arr[rightThird] > value){
+			l = leftThird + 1;
+			r = rightThird - 1;
+		}
+		else
+			l = rightThird + 1;
+	}
+
+	return -1;
+}

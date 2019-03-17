@@ -57,8 +57,19 @@ int main(){
 	std::cout << "Value 3 (0):" << value3 << std::endl;
 	std::cout << "Value 4 (499999999):" << value4 << std:: endl << std::endl;
 
+	// teste ternarySearchIterative
+	value1 = ternarySearchIterative(arr, 0, MAXN-1, 2000);
+	value2 = ternarySearchIterative(arr, 0, MAXN-1, 2001);
+	value3 = ternarySearchIterative(arr, 0, MAXN-1, 0);
+	value4 = ternarySearchIterative(arr, 0, MAXN-1, (MAXN-1) * 2);
+	std::cout << ">>> ternarySearchIterative\n";
+	std::cout << "Value 1 (1000):" << value1 << std::endl;
+	std::cout << "Value 2 (-1):" << value2 << std::endl;
+	std::cout << "Value 3 (0):" << value3 << std::endl;
+	std::cout << "Value 4 (499999999):" << value4 << std:: endl << std::endl;
 
 	delete[] arr;
+
 
 	return 0;
 }
