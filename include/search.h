@@ -1,7 +1,8 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
-#include <cmath>
+#include <cmath> 	// sqrt()
+#include <vector>	// std::vector
 
 int linearSearchIterative(long int arr[], int l, int r, long int value); 
 
@@ -14,5 +15,7 @@ int ternarySearchIterative(long int arr[], int l, int r, long int value);
 int ternarySearchRecursive(long int arr[], int l, int r, long int value);
 
 int jumpSearch(long int arr[], int l, int r, long int value);
+
+int fibonacciSearch(long int arr[], int l, int r, long int value);
 
 #endif

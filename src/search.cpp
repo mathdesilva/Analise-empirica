@@ -108,3 +108,30 @@ int jumpSearch(long int arr[], int l, int r, long int value){
 
 	return linearSearchIterative(arr, l, r, value);
 }
+
+int fibonacciSearch(long int arr[], int l, int r, long int value){
+	int size_arr = r - l;
+
+	// mapping fibonacci numbers
+	int fib1 = 0;
+	int fib2 = 1;
+	int fib3 = 1;
+
+	while(fib3 < size_arr){
+		fib1 = fib2;
+		fib2 = fib3;
+		fib3 = fib1 + fib2;
+	}
+
+	// searching
+	if(l <= r){
+		if(arr[l + fib1] == value)
+			return l + fib1;
+		else if(arr[l + fib1] > value)
+			return fibonacciSearch(arr, l, l + fib1 - 1, value);
+		else
+			return fibonacciSearch(arr, l + fib1 + 1, r, value);
+	}
+
+	return -1;
+}
