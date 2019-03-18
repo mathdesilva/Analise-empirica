@@ -89,3 +89,22 @@ int ternarySearchRecursive(long int arr[], int l, int r, long int value){
 
 	return -1;
 }
+
+int jumpSearch(long int arr[], int l, int r, long int value){
+	int size_arr = r - l;
+	int jumpgroup = sqrt(size_arr);
+	int rightgroup = l + jumpgroup;
+
+	while(rightgroup >= r){
+		if(arr[rightgroup] == value)
+			return rightgroup;
+		else if(arr[rightgroup] > value)
+			return linearSearchIterative(arr, l, rightgroup - 1, value);
+		else{
+			l = rightgroup + 1;
+			rightgroup += rightgroup;
+		}
+	}
+
+	return linearSearchIterative(arr, l, r, value);
+}
