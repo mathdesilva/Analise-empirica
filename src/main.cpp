@@ -1,5 +1,7 @@
+#include <fstream>
 #include <iostream>
 #include <new>
+#include <stdio.h>
 #include <string>
 
 #include "search.h"
@@ -35,16 +37,60 @@ int main(){
 	}
 
 	// getting algorithm choices
-	std::string algorithms = setAlgorithmsMenu();
-	if(algorithms == "0"){		// error case
+	std::string str_algorithms = setAlgorithmsMenu();
+	if(str_algorithms == "0"){		// error case
 		showErrorMessage(2);
 		delete[] arr;
 		return 0;
 	}
 
+	//=========== TESTS ============================================
+	int algNumber = str_algorithms.size();		// number of algorithms to be tested
+
+	// running each algorithm choiced
+	for(int i = 0 ; i < algNumber ; i++){
+		// open algorithm file to write tests data
+		std::ofstream outfile ("data.txt");
+
+		// TODO: run tests
+
+		outfile << "opa" << std::endl;
+		outfile << "FELIPE E CARVALHO ALALALALA" << std::endl;
+
+		// close algorithm data file
+		outfile.close();
+
+		// rename data file
+		switch(str_algorithms[i]){
+			case '1':
+				rename("data.txt", "linearData.txt");
+				break;
+			case '2':
+				rename("data.txt", "iterBinaryData.txt");
+				break;
+			case '3':
+				rename("data.txt", "recurBinaryData.txt");
+				break;
+			case '4':
+				rename("data.txt", "iterTernaryData.txt");
+				break;
+			case '5':
+				rename("data.txt", "recurTernaryData.txt");
+				break;
+			case '6':
+				rename("data.txt", "jumpData.txt");
+				break;
+			case '7':
+				rename("data.txt", "fibonacciData.txt");
+				break;
+		}
+	}
+
+	//==============================================================
+
 	// test
 	std::cout << numTests << std::endl;
-	std::cout << algorithms << std::endl;
+	std::cout << str_algorithms << std::endl;
 
 
 	// deallocating array

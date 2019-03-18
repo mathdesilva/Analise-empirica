@@ -26,3 +26,6 @@ $(OBJ_DIR)/util.o: $(SRC_DIR)/util.cpp $(INC_DIR)/util.h
 
 clear:
 	rm -r $(OBJ_DIR) $(BIN_DIR)
+
+cleardata:
+	rm *.txt
