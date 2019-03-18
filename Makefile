@@ -3,13 +3,15 @@ INC_DIR = ./include
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 BIN_DIR = ./bin
+DATA_DIR = ./data
 
 #Variaveis
 CC = g++
-CFLAGS = -Wall -std=c++11
+CFLAGS = -Wall -Wextra -std=c++11
 
 output: $(OBJ_DIR)/main.o $(OBJ_DIR)/search.o $(OBJ_DIR)/util.o
 	mkdir -p bin
+	mkdir -p data
 	$(CC) $(CFLAGS) $(OBJ_DIR)/main.o $(OBJ_DIR)/search.o $(OBJ_DIR)/util.o -o $(BIN_DIR)/analiseEmpirica
 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
@@ -28,4 +30,4 @@ clear:
 	rm -r $(OBJ_DIR) $(BIN_DIR)
 
 cleardata:
-	rm *.txt
+	rm -r $(DATA_DIR)
