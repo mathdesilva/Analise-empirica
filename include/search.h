@@ -2,7 +2,6 @@
 #define SEARCH_H
 
 #include <cmath> 	// sqrt()
-#include <vector>	// std::vector
 
 int linearSearchIterative(long int arr[], int l, int r, long int value); 
 
