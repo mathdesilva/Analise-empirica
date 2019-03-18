@@ -1,3 +1,4 @@
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <new>
@@ -45,17 +46,60 @@ int main(){
 	}
 
 	//=========== TESTS ============================================
-	int algNumber = str_algorithms.size();		// number of algorithms to be tested
-
+	const int algNumber = str_algorithms.size();		// number of algorithms to be tested
+	const int sumIterator = (arr_sz - 1000) / numTests;	// group of elements to sum for each test
+	int worstCase = 1;
 	// running each algorithm choiced
 	for(int i = 0 ; i < algNumber ; i++){
 		// open algorithm file to write tests data
 		std::ofstream outfile ("data.txt");
 
-		// TODO: run tests
+		//>>>>>>>>>>>>>>>>>>> RUN TESTS <<<<<<<<<<<<<<<<<<
+		int curTestCase = 1000;			// current number of elements
+		int testsCounter = 0;			// tests counter
 
-		outfile << "opa" << std::endl;
-		outfile << "FELIPE E CARVALHO ALALALALA" << std::endl;
+		// running each test case
+		while(testsCounter < numTests){
+
+			// running 100 times each test case
+			for(int j = 0 ; j < 100 ; j++){
+
+				switch(str_algorithms[i]){
+					case '1':
+						linearSearchIterative(arr, 0, curTestCase - 1, worstCase);
+						break;
+					case '2':
+						binarySearchIterative(arr, 0, curTestCase - 1, worstCase);
+						break;
+					case '3':
+						binarySearchRecursive(arr, 0, curTestCase - 1, worstCase);
+						break;
+					case '4':
+						ternarySearchIterative(arr, 0, curTestCase - 1, worstCase);
+						break;
+					case '5':
+						ternarySearchRecursive(arr, 0, curTestCase - 1, worstCase);
+						break;
+					case '6':
+						jumpSearch(arr, 0, curTestCase - 1, worstCase);
+						break;
+					case '7':
+						fibonacciSearch(arr, 0, curTestCase - 1, worstCase);
+						break;
+				}			
+
+			}
+
+			// setting next test case
+			if(testsCounter == numTests - 1)
+				curTestCase = arr_sz;
+			else
+				curTestCase += sumIterator;
+
+			testsCounter++; 
+		}
+
+		//>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<
 
 		// close algorithm data file
 		outfile.close();
