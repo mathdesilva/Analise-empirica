@@ -61,7 +61,8 @@ int main(){
 	// running each algorithm choiced
 	for(int i = 0 ; i < algNumber ; i++){
 		// open algorithm file to write tests data
-		std::ofstream outfile ("./data/data.txt");
+		std::ofstream outfiletime ("./data/data1.txt");
+		std::ofstream outfilestep ("./data/data2.txt");
 
 		//>>>>>>>>>>>>>>>>>>> RUN TESTS <<<<<<<<<<<<<<<<<<
 		int curTestCase = 1000;			// current number of elements
@@ -126,11 +127,15 @@ int main(){
 				averageSteps += (glob_stepcounter - averageSteps)/j;
 			}
 
-			// sending average to data file
+			// sending average time to time data file
 			std::string str_curTestCase = std::to_string(curTestCase);
-			outfile << curTestCase << std::setw(32 - str_curTestCase.size())
+			outfiletime << curTestCase << std::setw(32 - str_curTestCase.size())
 				<< std::chrono::duration <double, std::milli> (diff).count()
 				<< std:: endl;
+
+			// sending average steps to step data file
+			outfilestep << curTestCase << std::setw(32 - str_curTestCase.size())
+				<< averageSteps << std:: endl;
 
 			// setting next test case
 			if(testsCounter == numTests - 2)
@@ -143,37 +148,45 @@ int main(){
 
 		//>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<
 
-		// close algorithm data file
-		outfile.close();
+		// close algorithm data files
+		outfiletime.close();
+		outfilestep.close();
 
 		// rename data file
 		switch(str_algorithms[i]){
 			case '1':
-				rename("./data/data.txt", "./data/linearData.txt");
+				rename("./data/data1.txt", "./data/linearDataTime.txt");
+				rename("./data/data2.txt", "./data/linearDataStep.txt");
 				std::cout << ">>> Iterative Linear Search result:" << std::endl;
 				break;
 			case '2':
-				rename("./data/data.txt", "./data/iterBinaryData.txt");
+				rename("./data/data1.txt", "./data/iterBinaryDataTime.txt");
+				rename("./data/data2.txt", "./data/iterBinaryDataStep.txt");
 				std::cout << ">>> Iterative Binary Search result:" << std::endl;
 				break;
 			case '3':
-				rename("./data/data.txt", "./data/recurBinaryData.txt");
+				rename("./data/data1.txt", "./data/recurBinaryDataTime.txt");
+				rename("./data/data2.txt", "./data/recurBinaryDataStep.txt");
 				std::cout << ">>> Recursive Binary Search result:" << std::endl;
 				break;
 			case '4':
-				rename("./data/data.txt", "./data/iterTernaryData.txt");
+				rename("./data/data1.txt", "./data/iterTernaryDataTime.txt");
+				rename("./data/data2.txt", "./data/iterTernaryDataStep.txt");
 				std::cout << ">>> Iterative Ternary Search result:" << std::endl;
 				break;
 			case '5':
-				rename("./data/data.txt", "./data/recurTernaryData.txt");
+				rename("./data/data1.txt", "./data/recurTernaryDataTime.txt");
+				rename("./data/data2.txt", "./data/recurTernaryDataStep.txt");
 				std::cout << ">>> Recursive Ternary Search result:" << std::endl;
 				break;
 			case '6':
-				rename("./data/data.txt", "./data/jumpData.txt");
+				rename("./data/data1.txt", "./data/jumpDataTime.txt");
+				rename("./data/data2.txt", "./data/jumpDataStep.txt");
 				std::cout << ">>> Jump Search result:" << std::endl;
 				break;
 			case '7':
-				rename("./data/data.txt", "./data/fibonacciData.txt");
+				rename("./data/data1.txt", "./data/fibonacciDataTime.txt");
+				rename("./data/data2.txt", "./data/fibonacciDataStep.txt");
 				std::cout << ">>> Fibonacci Search result:" << std::endl;
 				break;
 		}
