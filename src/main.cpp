@@ -9,7 +9,8 @@
 #include "search.h"
 #include "util.h"
 
-long int glob_stepcounter;
+bool loadingMessage = false;		// set true to show loading messages
+long int glob_stepcounter;			// step counter
 
 int main(){
 	// testing allocation limit
@@ -76,14 +77,23 @@ int main(){
 		// average steps
 		long int averageSteps = 0;
 
+		// Loading message
+		if(loadingMessage)
+			std::cout << "Loading\n";
+
 		// running each test case
 		while(testsCounter < numTests){
 			averageSteps = 0;
 			diff = start - start;
 
+			// loading message
+			if(loadingMessage)
+				std::cout << testsCounter++ << "th test\n";
+
 			// running 100 times each test case
 			for(int j = 1 ; j <= 100 ; j++){
 				glob_stepcounter = 0;
+
 				// START -------------------------------------------
 				switch(str_algorithms[i]){
 					case '1':
@@ -123,6 +133,7 @@ int main(){
 						break;
 				}			
 				// END ---------------------------------------------
+
 				diff += ((end - start) - diff)/j;
 				averageSteps += (glob_stepcounter - averageSteps)/j;
 			}
@@ -147,6 +158,10 @@ int main(){
 		}
 
 		//>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<
+
+		// ending loading message
+		if(loadingMessage)
+			std::cout << std::endl;
 
 		// close algorithm data files
 		outfiletime.close();
