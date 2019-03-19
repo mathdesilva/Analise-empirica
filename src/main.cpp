@@ -9,7 +9,7 @@
 #include "search.h"
 #include "util.h"
 
-bool loadingMessage = false;		// set true to show loading messages
+bool loadingMessage = true;		// set true to show loading messages
 long int glob_stepcounter;			// step counter
 
 int main(){
@@ -88,7 +88,7 @@ int main(){
 
 			// loading message
 			if(loadingMessage)
-				std::cout << testsCounter++ << "th test\n";
+				std::cout << testsCounter + 1 << "th test\n";
 
 			// running 100 times each test case
 			for(int j = 1 ; j <= 100 ; j++){
