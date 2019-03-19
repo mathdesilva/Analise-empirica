@@ -9,6 +9,8 @@
 #include "search.h"
 #include "util.h"
 
+long int glob_stepcounter;
+
 int main(){
 	// testing allocation limit
 	std::cout << "Testing allocation limit.\n";
@@ -70,55 +72,58 @@ int main(){
 		auto end = std::chrono::steady_clock::now();
 		auto diff = start - start;
 
+		// average steps
+		long int averageSteps = 0;
+
 		// running each test case
 		while(testsCounter < numTests){
-			
+			averageSteps = 0;
 			diff = start - start;
 
 			// running 100 times each test case
 			for(int j = 1 ; j <= 100 ; j++){
-
+				glob_stepcounter = 0;
 				// START -------------------------------------------
 				switch(str_algorithms[i]){
 					case '1':
 						start = std::chrono::steady_clock::now();
-						linearSearchIterative(arr, 0, curTestCase - 1, worstCase);
+						linearSearchIterative(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '2':
 						start = std::chrono::steady_clock::now();
-						binarySearchIterative(arr, 0, curTestCase - 1, worstCase);
+						binarySearchIterative(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '3':
 						start = std::chrono::steady_clock::now();
-						binarySearchRecursive(arr, 0, curTestCase - 1, worstCase);
+						binarySearchRecursive(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '4':
 						start = std::chrono::steady_clock::now();
-						ternarySearchIterative(arr, 0, curTestCase - 1, worstCase);
+						ternarySearchIterative(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '5':
 						start = std::chrono::steady_clock::now();
-						ternarySearchRecursive(arr, 0, curTestCase - 1, worstCase);
+						ternarySearchRecursive(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '6':
 						start = std::chrono::steady_clock::now();
-						jumpSearch(arr, 0, curTestCase - 1, worstCase);
+						jumpSearch(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '7':
 						start = std::chrono::steady_clock::now();
-						fibonacciSearch(arr, 0, curTestCase - 1, worstCase);
+						fibonacciSearch(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 				}			
 				// END ---------------------------------------------
 				diff += ((end - start) - diff)/j;
-
+				averageSteps += (glob_stepcounter - averageSteps)/j;
 			}
 
 			// sending average to data file
@@ -174,9 +179,11 @@ int main(){
 		}
 
 		// show result
-		std::cout << "   > worst case using " << arr_sz << " elements: "
+		std::cout << "   > Worst case using " << arr_sz << " elements: "
 			<< std::chrono::duration <double, std::milli> (diff).count()
-			<< " ms\n\n";
+			<< " ms\n";
+		std::cout << "   > Number of steps to " << arr_sz << " elements: "
+			<< averageSteps << std::endl << std::endl;
 	}
 
 	//==============================================================
