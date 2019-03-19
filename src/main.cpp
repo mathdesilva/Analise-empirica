@@ -11,6 +11,7 @@
 
 int main(){
 	// testing allocation limit
+	std::cout << "Testing allocation limit.\n";
 	const int arr_sz = setMemoryLimit();
 	if(arr_sz == 0){			// error case
 		showErrorMessage(1);
@@ -18,6 +19,7 @@ int main(){
 	}
 
 	// allocating array
+	std::cout << "Allocating array.\n";
 	long int * arr;
 	arr = new (std::nothrow) long int [arr_sz];
 	if(arr == nullptr){			// error case
@@ -27,6 +29,7 @@ int main(){
 	std::cout << "Array with size " << arr_sz << " allocated.\n";
 
 	// putting values in the array
+	std::cout << "Putting values.\n";
 	for(int i = 0 ; i < arr_sz ; i++)
 		arr[i] = i * 2;
 
@@ -46,6 +49,8 @@ int main(){
 		return 0;
 	}
 
+
+	std::cout << std::endl << ">>>>>>>>>> RUNNING <<<<<<<<<<\n\n";
 	//=========== TESTS ============================================
 	const int algNumber = str_algorithms.size();		// number of algorithms to be tested
 	const int sumIterator = (arr_sz - 1000) / numTests;	// group of elements to sum for each test
@@ -60,43 +65,58 @@ int main(){
 		int curTestCase = 1000;			// current number of elements
 		int testsCounter = 0;			// tests counter
 
+		// initializing chrono and setting average
+		auto start = std::chrono::steady_clock::now();
+		auto end = std::chrono::steady_clock::now();
+		auto diff = start - start;
+
 		// running each test case
 		while(testsCounter < numTests){
-			// initializing chrono and setting average
-			auto start = std::chrono::steady_clock::now();
-			auto end = std::chrono::steady_clock::now();
-			auto diff = start - start;
+			
+			diff = start - start;
 
 			// running 100 times each test case
 			for(int j = 1 ; j <= 100 ; j++){
 
-				start = std::chrono::steady_clock::now();
 				// START -------------------------------------------
 				switch(str_algorithms[i]){
 					case '1':
+						start = std::chrono::steady_clock::now();
 						linearSearchIterative(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 					case '2':
+						start = std::chrono::steady_clock::now();
 						binarySearchIterative(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 					case '3':
+						start = std::chrono::steady_clock::now();
 						binarySearchRecursive(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 					case '4':
+						start = std::chrono::steady_clock::now();
 						ternarySearchIterative(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 					case '5':
+						start = std::chrono::steady_clock::now();
 						ternarySearchRecursive(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 					case '6':
+						start = std::chrono::steady_clock::now();
 						jumpSearch(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 					case '7':
+						start = std::chrono::steady_clock::now();
 						fibonacciSearch(arr, 0, curTestCase - 1, worstCase);
+						end = std::chrono::steady_clock::now();
 						break;
 				}			
 				// END ---------------------------------------------
-				end = std::chrono::steady_clock::now();
 				diff += ((end - start) - diff)/j;
 
 			}
@@ -125,34 +145,41 @@ int main(){
 		switch(str_algorithms[i]){
 			case '1':
 				rename("./data/data.txt", "./data/linearData.txt");
+				std::cout << ">>> Iterative Linear Search result:" << std::endl;
 				break;
 			case '2':
 				rename("./data/data.txt", "./data/iterBinaryData.txt");
+				std::cout << ">>> Iterative Binary Search result:" << std::endl;
 				break;
 			case '3':
 				rename("./data/data.txt", "./data/recurBinaryData.txt");
+				std::cout << ">>> Recursive Binary Search result:" << std::endl;
 				break;
 			case '4':
 				rename("./data/data.txt", "./data/iterTernaryData.txt");
+				std::cout << ">>> Iterative Ternary Search result:" << std::endl;
 				break;
 			case '5':
 				rename("./data/data.txt", "./data/recurTernaryData.txt");
+				std::cout << ">>> Recursive Ternary Search result:" << std::endl;
 				break;
 			case '6':
 				rename("./data/data.txt", "./data/jumpData.txt");
+				std::cout << ">>> Jump Search result:" << std::endl;
 				break;
 			case '7':
 				rename("./data/data.txt", "./data/fibonacciData.txt");
+				std::cout << ">>> Fibonacci Search result:" << std::endl;
 				break;
 		}
+
+		// show result
+		std::cout << "   > worst case using " << arr_sz << " elements: "
+			<< std::chrono::duration <double, std::milli> (diff).count()
+			<< " ms\n\n";
 	}
 
 	//==============================================================
-
-	// test
-	std::cout << numTests << std::endl;
-	std::cout << str_algorithms << std::endl;
-
 
 	// deallocating array
 	delete[] arr;
