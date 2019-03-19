@@ -30,4 +30,4 @@ clear:
 	rm -r $(OBJ_DIR) $(BIN_DIR)
 
 cleardata:
-	rm -r $(DATA_DIR)
+	rm $(DATA_DIR)/*
