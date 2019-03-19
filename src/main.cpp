@@ -9,7 +9,7 @@
 #include "search.h"
 #include "util.h"
 
-bool loadingMessage = true;		// set true to show loading messages
+bool loadingMessage = false;		// set true to show loading messages
 long int glob_stepcounter;			// step counter
 
 int main(){
@@ -66,7 +66,7 @@ int main(){
 		std::ofstream outfilestep ("./data/data2.txt");
 
 		//>>>>>>>>>>>>>>>>>>> RUN TESTS <<<<<<<<<<<<<<<<<<
-		int curTestCase = 1000;			// current number of elements
+		int curTestCase = 100;			// current number of elements
 		int testsCounter = 0;			// tests counter
 
 		// initializing chrono and setting average
@@ -123,12 +123,12 @@ int main(){
 						break;
 					case '6':
 						start = std::chrono::steady_clock::now();
-						jumpSearch(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
+						jumpSearch(arr, 0, curTestCase - 1, (arr_sz * 2 - 1), glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 					case '7':
 						start = std::chrono::steady_clock::now();
-						fibonacciSearch(arr, 0, curTestCase - 1, worstCase, glob_stepcounter);
+						fibonacciSearch(arr, 0, curTestCase - 1, (arr_sz * 2) + 1, glob_stepcounter);
 						end = std::chrono::steady_clock::now();
 						break;
 				}			
