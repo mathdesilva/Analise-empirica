@@ -7,7 +7,7 @@ Este é um projeto da matéria de Estrutura de Dados Básicas I com a finalidade
 ## Como compilar:
 Será necessário para a compilação do programa:
 * `make`
-* `gcc`
+* `g++`
 
 Para compilar basta clonar o repositório, entrar no diretório raiz do projeto e digitar no terminal:
 
@@ -27,7 +27,7 @@ Para deletar os arquivos gerados na execução do programa use:
 ## Como usar:
 Em `>>> Set the number of tests [30:100]` defina o número de testes que será executado nos algoritmos.
 
-Em `Set the algorithms index` defina os index [1:7] dos algoritmos que deseja testar. Exemplos de entradas válidas:
+Em `>>> Set the algorithms index` defina os index [1:7] dos algoritmos que deseja testar. Exemplos de entradas válidas:
 * `3`
 * `1 2 3 5`
 * `5 3 1`
