@@ -1,5 +1,6 @@
 #include "search.h"
 
+
 int linearSearchIterative(long int arr[], int l, int r, long int value, long int &stepcounter){
 
 	while(l <= r){
@@ -106,9 +107,9 @@ int jumpSearch(long int arr[], int l, int r, long int value, long int &stepcount
 	int jumpgroup = sqrt(size_arr);
 	int rightgroup = l + jumpgroup;
 
-	while(rightgroup >= r){
+	while(rightgroup <= r){
 		stepcounter++;
-		
+
 		if(arr[rightgroup] == value)
 			return rightgroup;
 		else if(arr[rightgroup] > value)
